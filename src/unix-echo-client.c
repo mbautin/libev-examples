@@ -65,10 +65,8 @@ static void send_cb (EV_P_ ev_io *w, int revents)
 
 static void stdin_cb (EV_P_ ev_io *w, int revents)
 {
-  int len2; // not sure if this is at all useful
-
   puts ("stdin written to, reading...");
-  len2 = getline(&line, &len, stdin);
+  getline(&line, &len, stdin);
   ev_io_stop(EV_A_ &send_w);
   ev_io_set (&send_w, remote_fd, EV_READ | EV_WRITE);
   ev_io_start(EV_A_ &send_w);
